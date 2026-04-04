@@ -7,7 +7,6 @@ const s3 = require("../services/s3");
 const File = require("../models/File");
 const archiver = require("archiver");
 
-// ✅ Upload route
 router.post("/upload", upload.array("files", 10), async (req, res) => {
   try {
     const files = req.files;
@@ -62,7 +61,6 @@ router.post("/upload", upload.array("files", 10), async (req, res) => {
   }
 });
 
-// ✅ Download route
 router.get("/file/:id", async (req, res) => {
   try {
     const fileDoc = await File.findById(req.params.id);
@@ -73,7 +71,6 @@ router.get("/file/:id", async (req, res) => {
       return res.status(403).send("File expired");
     }
 
-    // ✅ STRICT CHECK
     if (fileDoc.downloadCount + 1 > fileDoc.maxDownloads) {
       console.log("Download blocked");
       return res.status(403).send("Download limit reached");
@@ -83,7 +80,6 @@ router.get("/file/:id", async (req, res) => {
       `Download ${fileDoc.downloadCount + 1}/${fileDoc.maxDownloads}`
     );
 
-    // ✅ ATOMIC INCREMENT (VERY IMPORTANT)
     await File.findByIdAndUpdate(
       fileDoc._id,
       { $inc: { downloadCount: 1 } }
@@ -120,5 +116,5 @@ router.get("/file/:id", async (req, res) => {
     res.status(500).send("Error downloading files");
   }
 });
-// ✅ EXPORT AT VERY END
+
 module.exports = router;
