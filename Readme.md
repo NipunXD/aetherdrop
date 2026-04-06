@@ -106,6 +106,7 @@ Public access is enabled via Cloudflare Tunnel with HTTPS support.
 aetherdrop/
 ├── frontend/
 ├── backend/
+├── monitoring/
 ├── docker-compose.yml
 └── README.md
 ```
