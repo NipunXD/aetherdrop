@@ -9,6 +9,7 @@ Built as a full-stack system with production-ready infrastructure, it focuses on
 ## 🌐 Live Demo
 
 > Accessible via Cloudflare Tunnel (temporary public URL)
+> https://trinity-aid-tribute-approved.trycloudflare.com/
 
 ---
 
